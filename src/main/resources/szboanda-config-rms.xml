@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>统一权限管理配置文件</comment>
+	
+<!-- 菜单相关的SQL -->	
+<entry key="rms.cddao.gettadminrmscd"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_CD WHERE XH = ?    
+]]></entry>
+
+<entry key="rms.cddao.getroottadminrmscd"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_CD WHERE CDXH = 'ROOT' and SSXT = ?   
+]]></entry>
+
+<entry key="rms.cddao.savetadminrmscd"><![CDATA[
+INSERT INTO T_ADMIN_RMS_CD (XH, CDXH, CDMC, SSXT, SFYX, PXH, FCDXH, PYJX, TPWZ, TPTS, LJXT, LJDZ, BZ, CJSJ, CJR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.cddao.updatetadminrmscd"><![CDATA[
+UPDATE T_ADMIN_RMS_CD SET XH = ?, CDXH = ?, CDMC = ?, SSXT = ?, SFYX = ?, PXH = ?, FCDXH = ?, PYJX = ?, TPWZ = ?, TPTS = ?, LJXT = ?, LJDZ = ?, BZ = ?, XGSJ = ?, XGR = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.cddao.iscdxh"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_CD WHERE 1 = 1  and  CDXH = ?
+]]></entry>
+
+<entry key="rms.cddao.delecd"><![CDATA[
+DELETE FROM T_ADMIN_RMS_CD WHERE XH = ?
+]]></entry>
+
+<entry key="rms.cddao.upcd"><![CDATA[
+UPDATE T_ADMIN_RMS_CD SET FCDXH='' WHERE FCDXH = ?
+]]></entry>
+
+<entry key="rms.cddao.delecdjs"><![CDATA[
+DELETE FROM T_ADMIN_RMS_JSYCDGXB  WHERE CDXH = ?
+]]></entry>
+
+<entry key="rms.cdsdao.delecdgn"><![CDATA[
+DELETE FROM T_ADMIN_RMS_CDYGNGXB  WHERE CDXH = ?
+]]></entry>
+
+<entry key="rms_cddao_getallcds"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_CD  WHERE SSXT = ?
+]]></entry>
+
+<entry key="rms_cddao_getjscds"><![CDATA[
+SELECT CD.* FROM T_ADMIN_RMS_JSYCDGXB GX 
+INNER JOIN T_ADMIN_RMS_CD CD ON GX.CDXH = CD.XH 
+INNER JOIN T_ADMIN_RMS_JS JS ON JS.XH = GX.JSXH AND CD.SSXT = JS.SSXT
+WHERE JS.SSXT = ? AND JS.XH = ? 
+]]></entry>
+
+<entry key="rms_cddao_getjscd"><![CDATA[
+SELECT CD.* FROM T_ADMIN_RMS_JSYCDGXB GX 
+INNER JOIN T_ADMIN_RMS_CD CD ON GX.CDXH = CD.XH 
+INNER JOIN T_ADMIN_RMS_JS JS ON JS.XH = GX.JSXH AND CD.SSXT = JS.SSXT
+WHERE JS.SSXT = ? AND JS.XH = ? AND CD.XH = ?
+]]></entry>
+
+<entry key="rms_cddao_getjsbyfcd"><![CDATA[
+SELECT CD.* FROM T_ADMIN_RMS_JSYCDGXB GX 
+INNER JOIN T_ADMIN_RMS_CD CD ON GX.CDXH = CD.XH 
+INNER JOIN T_ADMIN_RMS_JS JS ON JS.XH = GX.JSXH AND CD.SSXT = JS.SSXT
+WHERE JS.SSXT = ? AND JS.XH = ? AND CD.FCDXH = ?
+]]></entry>
+
+<!-- 菜单功能关系相关SQL -->
+<entry key="rms.cdygngxdao.savecdgngx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_CDYGNGXB (XH, CDXH, GNXH, CJSJ, CJR, XGSJ, XGR) VALUES (?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.cdygngxdao.deletecdgngx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_CDYGNGXB where CDXH = ? and GNXH = ?
+]]></entry>
+
+<entry key="rms.cdygngxdao.getyhzjslist"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_CDYGNGXB WHERE 1 = 1  and CDXH = ? 
+]]></entry>
+
+<entry key="rms.cdygngxdao.iscdgn"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_CDYGNGXB WHERE 1 = 1  and CDXH = ?  and GNXH = ?
+]]></entry>
+
+<!-- 功能相关SQL -->
+<entry key="rms.gndao.gettadminrmsgn"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_GN WHERE XH = ?
+]]></entry>
+
+<entry key="rms.gndao.savetadminrmsgn"><![CDATA[
+INSERT INTO T_ADMIN_RMS_GN (XH, GNXH, GNMC, SFYX, SSXT, PYJX, GNWZ, BZ, PXH, CJSJ, CJR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.gndao.updatetadminrmsgn"><![CDATA[
+UPDATE T_ADMIN_RMS_GN SET XH = ?, GNXH = ?, GNMC = ?, SFYX = ?, SSXT = ?, PYJX = ?, GNWZ = ?, BZ = ?, PXH = ?, XGSJ = ?, XGR = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.gndao.isgnxh"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_GN WHERE 1 = 1  and  GNXH = ?
+]]></entry>
+
+<entry key="rms.gndao.delegnjs"><![CDATA[
+DELETE FROM T_ADMIN_RMS_JSYGNGXB WHERE GNXH = ?
+]]></entry>
+
+<entry key="rms.gndao.delegncd"><![CDATA[
+DELETE FROM T_ADMIN_RMS_CDYGNGXB WHERE GNXH = ?
+]]></entry>
+
+<entry key="rms.gndao.delegn"><![CDATA[
+DELETE FROM T_ADMIN_RMS_GN WHERE XH = ?
+]]></entry>
+<!-- 角色相关SQL -->
+<entry key="rms.jsdao.gettadminrmsjs"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_JS WHERE XH = ?  
+]]></entry>
+
+<entry key="rms.jsdao.savetadminrmsjs"><![CDATA[
+INSERT INTO T_ADMIN_RMS_JS (XH, JSMC, SFYX, SSXT, PXH, BZ, CJSJ, CJR, JSXH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.jsdao.updatetadminrmsjs"><![CDATA[
+UPDATE T_ADMIN_RMS_JS SET XH = ?, JSMC = ?, SFYX = ?, SSXT = ?, PXH = ?, BZ = ?, XGSJ = ?, XGR = ? , JSXH = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.jsdao.isjsxh"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_JS WHERE 1 = 1  and  JSXH = ?
+]]></entry>
+
+<entry key="rms.jsdao.delejs"><![CDATA[
+DELETE FROM T_ADMIN_RMS_JS WHERE XH = ?
+]]></entry>
+
+<entry key="rms.jsdao.delejsyhz"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHZYJSGXB WHERE JSXH = ?
+]]></entry>
+
+<entry key="rms.jsdao.delejscd"><![CDATA[
+DELETE FROM T_ADMIN_RMS_JSYCDGXB WHERE JSXH = ?
+]]></entry>
+
+<entry key="rms.jsdao.delejsgn"><![CDATA[
+DELETE FROM T_ADMIN_RMS_JSYGNGXB WHERE JSXH = ?
+]]></entry>
+
+<entry key="rms.bmdao.delezzjg"><![CDATA[
+DELETE FROM T_ADMIN_RMS_ZZJG WHERE XH = ?
+]]></entry>
+
+<!-- 角色与菜单相关SQL -->
+
+<entry key="rms.jsycdgxdao.savejscdgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_JSYCDGXB (XH, CDXH, JSXH, PXH, BZ, CJSJ, CJR, XGSJ, XGR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.jsycdgxdao.deletejscdgx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_JSYCDGXB where JSXH = ? and CDXH = ?
+]]></entry>
+
+<entry key="rms.jsycdgxdao.isjscd"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_JSYCDGXB WHERE 1 = 1  and JSXH = ?  and CDXH = ?
+]]></entry>
+
+<!-- 角色与功能SQL -->
+
+<entry key="rms.jsygngxdao.savegnjsgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_JSYGNGXB (XH, GNXH, JSXH, PXH, BZ, CJSJ, CJR, XGSJ, XGR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.jsygngxdao.deletegnjsgx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_JSYGNGXB where GNXH = ? and JSXH = ? 
+]]></entry>
+
+<entry key="rms.jsygngxdao.isgnjs"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_JSYGNGXB WHERE 1 = 1  and JSXH = ?  and GNXH = ?
+]]></entry>
+
+<!-- 系统相关SQL -->
+
+<entry key="rms.xtdao.gettadminrmsxt"><![CDATA[
+SELECT * FROM  T_ADMIN_RMS_XT WHERE XH = ?
+]]></entry>
+<entry key="rms.xtdao.savetadminrmsxt"><![CDATA[
+INSERT INTO T_ADMIN_RMS_XT (XH, XTBH, XTDZ, XTMC, XTJKLX, SFYX, PXH, BZ, CJSJ, CJR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.xtdao.updatetadminrmsxt"><![CDATA[
+UPDATE T_ADMIN_RMS_XT SET XH = ?, XTBH = ?, XTDZ = ?, XTMC = ?, XTJKLX = ?, SFYX = ?, PXH = ?, BZ = ?, XGSJ = ?, XGR = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.xtdao.isxtbh"><![CDATA[
+SELECT * FROM  T_ADMIN_RMS_XT WHERE XTBH = ?
+]]></entry>
+<!-- 系统与用户关系SQL -->
+
+<entry key="rms.xtyyhgxdao.saveyhzjsgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YHGX (XH, XTXH, YHID, CJSJ, CJR, XGSJ, XGR) VALUES (?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.cddao.rms.xtyyhgxdao.updatetadminrmsxtyyhgxb"><![CDATA[
+UPDATE T_ADMIN_RMS_YHGX SET XH = ?, XTXH = ?, YHID = ?, CJSJ = ?, CJR = ?, XGSJ = ?, XGR = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.xtyyhgxdao.gettadminrmsxtyyhgxb"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHGX WHERE XTXH = ? and YHXH = ?
+]]></entry>
+
+<entry key="rms.xtyyhgxdao.deleteyhzjsgx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_YHGX where XTXH = ? and YHID = ?
+]]></entry>
+
+<entry key="rms.xtyyhgxdao.isxtyh"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHGX WHERE 1 = 1  and XTXH = ?  and YHXH = ?
+]]></entry>
+
+<entry key="rms.xtyyhgxdao.deleteyhyhz"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHZYYHGXB gx where gx.YHXH = ? and gx.YHZXH in (SELECT yhz.XH from T_ADMIN_RMS_YHZ yhz WHERE yhz.SSXT = ?) 
+]]></entry>
+
+<entry key="rms.xtyyhgxdao.deleteyhgx"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHGX where YHID = ? and XTXH = ?
+]]></entry>
+<!-- 用户相关SQL  -->
+
+<entry key="rms.yhdao.gettpdusermaster"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_YH WHERE YHID = ?
+]]></entry>
+
+<entry key="rms.yhdao.deleteuser"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YH WHERE YHID = ?
+]]></entry>
+
+<entry key="rms.yhdao.gettpdusermasteroflogin"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_YH WHERE YHID = ? and YHMM = ?
+]]></entry>
+
+<entry key="rms.yhdao.savetpdusermaster"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YH (YHID, YHMC, YHCW, YHMM, YHZW, YHSJ, BGDH, PYJX, BMBH, XB, SFYX, SFZG, PXH, NWYX, NWYXMM, WWYX, WWYXMM, ORGID, YHBJ, CJR, CJSJ) VALUES (?, ?, ?, ? ,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+<entry key="rms.yhdao.updatetpdusermaster"><![CDATA[
+UPDATE T_ADMIN_RMS_YH SET YHID = ?, YHMC = ?,YHCW = ?, YHMM = ?, YHZW = ?, YHSJ = ?, BGDH = ?, PYJX = ?, BMBH = ?, XB = ?, SFYX = ?, SFZG = ?, PXH = ?, NWYX = ?, NWYXMM = ?, WWYX = ?, WWYXMM = ?, ORGID = ?, YHBJ = ?, XGR = ?, XGSJ = ?  WHERE YHID = ? 
+]]></entry>
+
+<entry key="rms.yhdao.isumloginid"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_YH WHERE YHID = ?
+]]></entry>
+
+
+<entry key="rms.bmdao.savettadminrmszzjg"><![CDATA[
+INSERT INTO T_ADMIN_RMS_ZZJG(XH,ZZBH,ZZJC,ZZQC,ZZDH,SJZZXH,SFYX,PXH,PYJX,CJR,CJSJ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)
+]]></entry>
+
+<entry key="rms.yhdao.updatepxh"><![CDATA[
+UPDATE T_ADMIN_RMS_YH SET PXH = ? WHERE YHID = ? 
+]]></entry>
+
+<!-- 系统间用户关系SQL -->
+
+<entry key="rms.yhgxdao.saveyhgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YHGX (XH, YHID, XTXH, YYXTYHID, CJSJ) VALUES (?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.yhgxdao.updatetadminrmsyhgx"><![CDATA[
+UPDATE T_ADMIN_RMS_YHGX SET XH = ?, YHID = ?, XTXH = ?, YYXTYHID = ?, CJSJ = ?, CJR = ?, XGSJ = ?, XGR = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.yhgxdao.gettadminrmsyhgx"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHGX WHERE XTXH = ? and YHID = ?
+]]></entry>
+
+<entry key="rms.yhgxdao.deleteyhgx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_YHGX where XTXH = ? and YHID = ?
+]]></entry>
+
+<!-- 用户组SQL -->
+
+<entry key="rms.yhzdao.gettadminrmsyhz"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHZ WHERE XH = ?
+]]></entry>
+
+<entry key="rms.yhzdao.savetadminrmsyhz"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YHZ (XH, YHZMC, SSXT, SFYX, PXH, BZ, CJSJ, CJR, YHZXH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.yhzdao.updatetadminrmsyhz"><![CDATA[
+UPDATE T_ADMIN_RMS_YHZ SET XH = ?, YHZMC = ?, SSXT = ?, SFYX = ?, PXH = ?, BZ = ?, XGSJ = ?, XGR = ? , YHZXH = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.yhzdao.isyhzxh"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHZ WHERE 1 = 1  and  YHZXH = ?
+]]></entry>
+
+<entry key="rms.yhzdao.deleyhz"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHZ WHERE XH = ?
+]]></entry>
+
+<entry key="rms.yhzdao.deleyhzjs"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHZYJSGXB WHERE YHZXH = ?
+]]></entry>
+
+<entry key="rms.yhzdao.deleyhzyh"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHZYYHGXB WHERE YHZXH = ?
+]]></entry>
+<!-- 用户组与角色SQL -->
+<entry key="rms.yhzyjsgxdao.saveyhzjsgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YHZYJSGXB (XH, YHZXH, JSXH, PXH, BZ, CJSJ, CJR, XGSJ, XGR) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.yhzyjsgxdao.deleteyhzjsgx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_YHZYJSGXB where YHZXH = ? and JSXH = ?
+]]></entry>
+
+<entry key="rms.yhzyjsgxdao.isyhzjs"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHZYJSGXB WHERE 1 = 1  and YHZXH = ?  and JSXH = ?
+]]></entry>
+
+<!-- 用户组与用户SQL -->
+
+<entry key="rms.yhzyyhgxdao.saveyhzyhgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YHZYYHGXB (XH, YHZXH, YHXH, BZ, CJSJ, CJR, XGSJ, XGR) VALUES (?, ?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.yhzyyhgxdao.deleteyhzyhgx"><![CDATA[
+DELETE FROM  T_ADMIN_RMS_YHZYYHGXB where YHZXH = ? and YHXH = ?
+]]></entry>
+
+<entry key="rms.yhzyyhgxdao.isyhzyh"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_YHZYYHGXB WHERE 1 = 1  and YHZXH = ?  and YHXH = ?
+]]></entry>
+
+<!-- 组织相关 -->
+<entry key="rms.treebd.getdeptmenus"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_ZZJG
+]]></entry>
+
+<entry key="rms.zzjgdao.findchildrenzzbh"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_ZZJG WHERE SJZZXH = ?
+]]></entry>
+
+<entry key="rms.zzjgdao.findparentdept"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_ZZJG WHERE ZZBH = ?
+]]></entry>
+
+<entry key="rms.zzjgdao.gettadminrmszzjg"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_ZZJG WHERE XH = ?
+]]></entry>
+
+<entry key="rms.zzjgdao.savetadminrmszzjg"><![CDATA[
+INSERT INTO T_ADMIN_RMS_ZZJG (XH, ZZBH, ZZJC, ZZQC, ZZDH, SJZZXH, SFYX, PXH, PYJX, CJR, CJSJ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
+]]></entry>
+
+<entry key="rms.zzjgdao.updatetadminrmszzjg"><![CDATA[
+UPDATE T_ADMIN_RMS_ZZJG SET XH = ?, ZZBH = ?, ZZJC = ?, ZZQC = ?, ZZDH = ?, SJZZXH = ?, SFYX = ?, PXH = ? , PYJX = ? , XGR = ? , XGSJ = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.zzjgdao.iszzjgbh"><![CDATA[
+SELECT * FROM V_ADMIN_RMS_ZZJG WHERE ZZBH = ?
+]]></entry>
+
+<entry key="rms.zzjgdao.updateyhorgid"><![CDATA[
+UPDATE T_ADMIN_RMS_YH SET BMBH = ? WHERE BMBH = ? 
+]]></entry>
+
+<entry key="rms.zzjgdao.updatezzjgsjzzbh"><![CDATA[
+UPDATE T_ADMIN_RMS_ZZJG SET SJZZXH = ? WHERE SJZZXH = ? 
+]]></entry>
+
+<entry key="rms.zzjgdao.delezzjg"><![CDATA[
+DELETE FROM T_ADMIN_RMS_ZZJG WHERE XH = ? 
+]]></entry>
+
+<!-- 岗位相关 -->
+<entry key="rms.gwdao.gettadminrmsgw"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_GW WHERE XH = ?
+]]></entry>
+
+<entry key="rms.gwdao.savetadminrmsgw"><![CDATA[
+INSERT INTO T_ADMIN_RMS_GW (XH, GWMC, GWXH, PXH, BZ, CJR, CJSJ) VALUES (?, ?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.gwdao.updatetadminrmsgw"><![CDATA[
+UPDATE T_ADMIN_RMS_GW SET GWMC = ?, GWXH = ?, PXH=?, BZ = ?, XGR = ? , XGSJ = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.gwdao.deletetadminrmsgw"><![CDATA[
+DELETE FROM T_ADMIN_RMS_GW WHERE XH = ?
+]]></entry>
+
+<!-- 岗位与用户组关系 -->
+<entry key="rms.gwyyhzgxdao.gettadminrmsgwyyhzgx"><![CDATA[
+SELECT * FROM T_ADMIN_RMS_GWYYHZGXB WHERE XH = ?
+]]></entry>
+
+<entry key="rms.gwyyhzgxdao.savetadminrmsgwyyhzgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_GWYYHZGXB (XH, GWXH, YHZXH, XTXH, CJR, CJSJ) VALUES (?, ?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.gwyyhzgxdao.updatetadminrmsgwyyhzgxw"><![CDATA[
+UPDATE T_ADMIN_RMS_GWYYHZGXB SET GWMC = ?, GWXH = ?, PXH=?, BZ = ?, XGR = ? , XGSJ = ? WHERE XH = ? 
+]]></entry>
+
+<entry key="rms.gwyyhzgxdao.deletetadminrmsgwyyhzgx"><![CDATA[
+DELETE FROM T_ADMIN_RMS_GWYYHZGXB WHERE GWXH = ? AND YHZXH = ?
+]]></entry>
+
+
+<!-- 用户与岗位关系 -->
+
+<entry key="rms.yhygwgxdao.savetadminrmsyhygwgx"><![CDATA[
+INSERT INTO T_ADMIN_RMS_YHYGWGXB (XH, GWXH, YHXH, CJR, CJSJ) VALUES (?, ?, ?, ?, ?)
+]]></entry>
+
+<entry key="rms.yhygwgxdao.deletetadminrmsyhygwgx"><![CDATA[
+DELETE FROM T_ADMIN_RMS_YHYGWGXB WHERE GWXH = ? AND YHXH = ?
+]]></entry>
+
+
+<!-- 系统表 -->
+<entry key="rms.table.T_ADMIN_RMS_XT"><![CDATA[
+T_ADMIN_RMS_XT
+]]></entry>
+
+<!-- 菜单表 -->
+<entry key="rms.table.T_ADMIN_RMS_CD"><![CDATA[
+T_ADMIN_RMS_CD
+]]></entry>
+
+<!-- 菜单与功能表 -->
+<entry key="rms.table.T_ADMIN_RMS_CDYGNGXB"><![CDATA[
+T_ADMIN_RMS_CDYGNGXB
+]]></entry>
+
+<!-- 功能表 -->
+<entry key="rms.table.T_ADMIN_RMS_GN"><![CDATA[
+T_ADMIN_RMS_GN
+]]></entry>
+
+<!-- 角色表 -->
+<entry key="rms.table.T_ADMIN_RMS_JS"><![CDATA[
+T_ADMIN_RMS_JS
+]]></entry>
+
+<!-- 角色菜单表 -->
+<entry key="rms.table.T_ADMIN_RMS_JSYCDGXB"><![CDATA[
+T_ADMIN_RMS_JSYCDGXB
+]]></entry>
+
+<!-- 角色功能表 -->
+<entry key="rms.table.T_ADMIN_RMS_JSYGNGXB"><![CDATA[
+T_ADMIN_RMS_JSYGNGXB
+]]></entry>
+
+<!-- 系统用户表 -->
+<entry key="rms.table.T_ADMIN_RMS_XTYYHGXB"><![CDATA[
+T_ADMIN_RMS_XTYYHGXB
+]]></entry>
+
+<!-- 用户表 -->
+<entry key="rms.table.T_PD_USER_MASTER"><![CDATA[
+T_ADMIN_RMS_YH
+]]></entry>
+
+<!-- 系统间用户表 -->
+<entry key="rms.table.T_ADMIN_RMS_YHGX"><![CDATA[
+T_ADMIN_RMS_YHGX
+]]></entry>
+
+<!-- 用户组表 -->
+<entry key="rms.table.T_ADMIN_RMS_YHZ"><![CDATA[
+T_ADMIN_RMS_YHZ
+]]></entry>
+
+<!-- 用户组角色表 -->
+<entry key="rms.table.T_ADMIN_RMS_YHZYJSGXB"><![CDATA[
+T_ADMIN_RMS_YHZYJSGXB
+]]></entry>
+
+<!-- 用户组用户表 -->
+<entry key="rms.table.T_ADMIN_RMS_YHZYYHGXB"><![CDATA[
+T_ADMIN_RMS_YHZYYHGXB
+]]></entry>
+
+<!-- 用户视图 -->
+<entry key="rms.table.V_ADMIN_RMS_YHXXST"><![CDATA[
+V_ADMIN_RMS_YHXXST
+]]></entry>
+
+
+<!-- 部门表 -->
+<entry key="rms.table.T_ADMIN_RMS_ZZJG"><![CDATA[
+T_ADMIN_RMS_ZZJG
+]]></entry>
+
+<!-- 接口表 -->
+<entry key="rms.table.T_ADMIN_RMS_JK"><![CDATA[
+T_ADMIN_RMS_JK
+]]></entry>
+
+<!-- 岗位表 -->
+<entry key="rms.table.T_ADMIN_RMS_GW"><![CDATA[
+T_ADMIN_RMS_GW
+]]></entry>
+
+<!-- 用户组岗位关联表 -->
+<entry key="rms.table.T_ADMIN_RMS_GWYYHZGXB"><![CDATA[
+T_ADMIN_RMS_GWYYHZGXB
+]]></entry>
+
+<!-- 用户岗位关联表 -->
+<entry key="rms.table.T_ADMIN_RMS_YHYGWGXB"><![CDATA[
+T_ADMIN_RMS_YHYGWGXB
+]]></entry>
+ 
+<!-- 用户列表 -->
+<entry key="rms.yhlist.getyhlist"><![CDATA[
+select * from (select yh.*, zzjg.ZZQC from  V_ADMIN_RMS_YHXXST yh left join V_ADMIN_RMS_ZZJG zzjg on yh.BMBH = zzjg.ZZBH)  
+]]></entry>
+
+<!-- 用户系统列表 -->
+<entry key="rms.xtyhlist.getxtyhlist"><![CDATA[
+select gx.YHID, gx.XTXH, yh.YHMC, xt.XTBH, xt.XTMC, (CASE WHEN gx.YYXTYHID is  null  THEN '' ELSE gx.YYXTYHID END) YYXTYHID 
+   from T_ADMIN_RMS_YHGX gx, V_ADMIN_RMS_YHXXST yh, T_ADMIN_RMS_XT xt where gx.XTXH = '#SESSIONXTXH#' and yh.YHID = gx.YHID and xt.XH = gx.XTXH #WHERESTRING# #ORDERSTRING#
+]]></entry>
+
+<!-- 系统用户列表 -->
+<entry key="rms.xtmanage.getyhlist"><![CDATA[
+SELECT yh.YHID,yh.YHMC, yh.BMBH, bm.ZZJC, yh.PXH, gx.YYXTYHID, (CASE WHEN gx.XH is null  THEN '' ELSE 'checked=\"checked\"' END) ISCHECKED 
+   from  V_ADMIN_RMS_YHXXST yh left join T_ADMIN_RMS_YHGX gx on yh.YHID = gx.YHID and gx.XTXH = '#SESSIONXTXH#' left join V_ADMIN_RMS_ZZJG bm on yh.BMBH = bm.ZZBH WHERE 1 = 1 #WHERESTRING# #ORDERSTRING#
+]]></entry>
+
+<!--用户组用户-->
+<entry key="rms.yhzyhmanage.getyhlist"><![CDATA[
+select YH.*, (CASE WHEN (select count(*) from  T_ADMIN_RMS_YHZYYHGXB zygx where zygx.yhzxh = '#REQUESTYHZXH#' 
+        and zygx.yhxh = YH.YHID) > 0 THEN 'checked=\"checked\"' ELSE '' END) ISCHECKED 
+        from  V_ADMIN_RMS_YHXXST  YH  inner join  T_ADMIN_RMS_XTYYHGXB  xygx on YH.YHID = xygx.yhxh 
+        and xygx.xtxh =  '#SESSIONXTXH#' #WHERESTRING# #ORDERSTRING#";
+]]></entry>
+	
+
+<!-- 用户文件上传字面段名 -->
+<entry key="user_upload_fieldname"><![CDATA[
+uploadFile
+]]></entry>
+
+<!-- 用户文件上传字面段名 -->
+<entry key="fileModelPath"><![CDATA[
+user.xml
+]]></entry>
+
+<!-- ajaxtag key code -->
+<entry key="rms.ajaxtag.userlist"><![CDATA[
+SELECT um_name key,um_dept value FROM T_PD_USER_MASTER
+]]></entry>
+
+
+<entry key="rms.ajaxtag.deptlist"><![CDATA[
+select zzjc key,xh value from v_admin_rms_zzjg
+]]></entry>
+
+<entry key="rms.ajaxtag.menulist"><![CDATA[
+select cdmc key,xh value from t_admin_rms_cd where sfyx = '1' and ssxt=?
+]]></entry>
+
+</properties>

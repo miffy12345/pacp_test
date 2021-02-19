@@ -1,0 +1,11 @@
+<jsp:include page="/resources/template/templateTest.jsp"/>
+<jsp:include page="/resources/template/templateDemo.jsp"/>
+<jsp:include page="/resources/template/templatePicture1.jsp"/>
+<jsp:include page="/resources/template/templatePicture2.jsp"/>
+<jsp:include page="/resources/template/templatePicture3.jsp"/>
+<jsp:include page="/resources/template/templatePicture4.jsp"/>
+<jsp:include page="/resources/template/templateImages.jsp"/>
+<jsp:include page="/resources/template/todayFlow.jsp"/>
+<jsp:include page="/resources/template/loginTrend.jsp"/>
+<jsp:include page="/resources/template/browserStatistic.jsp"/>
+<jsp:include page="/resources/template/useFrequency.jsp"/>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+		
+		
+		<beans:bean name="SystemConfig" class="com.szboanda.platform.common.base.SystemConfig">
+			<beans:property name="config">
+				<beans:map>
+					<beans:entry key="orgid" value="52" />
+					<!-- 配置是否验证Referer 请求头信息。配置value="y"（不区分大小写）时会验证，其它值或不配置则不验证
+					ps：使用代理方式部署时验证refer头可能有问题 -->
+					<beans:entry key="isReferer" value="#{SystemConfig_isReferer}" />
+				</beans:map>
+			</beans:property>
+		</beans:bean>
+		
+
+</beans:beans>

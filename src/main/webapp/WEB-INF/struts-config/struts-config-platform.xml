@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+  <form-beans >
+  		<form-bean name="autoform" type="com.szboanda.platform.v3.util.struts.StrutsDynaForm" dynamic="true"/>
+  		
+  		<form-bean name="generatorForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="bean" type="org.apache.commons.beanutils.LazyDynaBean"></form-property>
+		</form-bean>
+  		
+  		<!--tools create for table SYS_PARAM_CONFIG-->
+		<form-bean name="sysParamConfigFrom" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="bean" type="com.szboanda.platform.v3.util.resources.SystemParamConfig"></form-property>
+		</form-bean>
+		
+		<!-- 实时监控 -->
+		<form-bean name="scoutForm" type="org.apache.struts.action.DynaActionForm">
+			<form-property name="startBh" type="java.lang.String" />
+		</form-bean>
+		
+	</form-beans>
+  <global-forwards >
+  		<forward name="error" path="/error.jsp"></forward>
+  </global-forwards> 
+  <action-mappings >
+  		<action name="autoform" parameter="method" path="/pages/form" scope="request"
+			type="com.szboanda.platform.v3.util.struts.FormAction" validate="false">
+			<forward name="page" path="/error.jsp"/>
+		</action>
+		
+  		<!--tools create for table SYS_PARAM_CONFIG-->
+		<action name="sysParamConfigFrom" parameter="method" path="/xtcs/maintSysParamConfig" scope="request" type="com.szboanda.platform.v3.system.action.MaintSysParamConfigAction" >
+			<forward name="service" path="com.szboanda.platform.v3.util.resources.SystemParamConfigService"></forward>
+			<forward name="page" path="/pages/platform/config/xtcs/sysParamConfigEdit.jsp"></forward>
+		</action>
+		
+		<action parameter="method" path="/login" scope="request" type="com.szboanda.platform.v3.util.authentication.AuthenticationAction" >
+			<forward name="pass" path="/platform/pages/index/loginSuccess.jsp" redirect="true"/> 
+			<forward name="fail" path="/platform/pages/index/loginFail.jsp"/> 
+			<forward name="page" path="/logout.jsp"></forward>
+			<forward name="repeat" path="/logrepeat.jsp"></forward>
+			<forward name="userLocked" path="/loginErrorLimit.jsp"></forward>
+		</action>
+		
+		<action parameter="method" path="/ikeylogin" scope="request" type="com.szboanda.platform.v3.util.authentication.IKeyAuthenticationAction" >
+			<forward name="fail" path="/loginfail.jsp"/> 
+		</action>
+	
+		<!--初始化首页相关信息-->
+		<action parameter="method" path="/initIndex" scope="request" type="com.szboanda.platform.v3.system.action.InitLoginPageAction" >
+			<forward name="page" path="/logout.jsp"></forward>
+		</action>
+
+	</action-mappings>
+</struts-config>
+

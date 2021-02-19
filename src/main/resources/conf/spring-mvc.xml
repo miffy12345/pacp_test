@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources/ directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	<resources mapping="/dynamicform/**" location="/dynamicform/" ></resources>
+	<resources mapping="/v3/**" location="/v3/" ></resources>
+	<resources mapping="/common/**" location="/common/" ></resources>
+
+	 <!-- 移动终端资源目录配置 start -->
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+    <mvc:resources mapping="/UPLOAD_FILE/**" location="/UPLOAD_FILE/" />
+    <!-- 移动终端资源目录配置 end -->
+	
+    <mvc:annotation-driven />
+    
+    <!-- 开启spring的任务配置扫描 -->
+	<task:annotation-driven scheduler="qbScheduler" mode="proxy"/>  
+    <task:scheduler id="qbScheduler" pool-size="10"/>
+     <!-- 拦截器配置 -->
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/**"/>
+    		<mvc:exclude-mapping path="/code"/>
+    		<mvc:exclude-mapping path="/login"/>
+    		<mvc:exclude-mapping path="/resources/**"/>
+    		<mvc:exclude-mapping path="/platform/userbehavior/**"/>
+    		<mvc:exclude-mapping path="/platform/tools/toolcontroller/**"/>
+    		<mvc:exclude-mapping path="/platform/component/dict/commondictcontroller/getDictByName"/>
+    		<mvc:exclude-mapping path="/cassso/getuseraccount" />
+    		<beans:bean class="com.szboanda.platform.common.interceptor.PlatformInterceptor"></beans:bean>
+    	</mvc:interceptor>
+		<!-- 安全拦截器配置 -->
+    	<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<beans:bean
+				class="com.szboanda.platform.common.interceptor.SecurityInterceptor"></beans:bean>
+		</mvc:interceptor>
+    </mvc:interceptors>
+	<!-- spring注解扫描基础包目录配置 -->
+    <context:component-scan base-package="com.szboanda">
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!--视图解析器配置-->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+    </beans:bean>
+
+	<!-- 表示将请求的URL和Bean名字映射 -->
+	<beans:bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+	<beans:bean name="/platform/component/tree/commontreecontroller/**" class="com.szboanda.platform.common.component.tree.controller.CommonTreeController"/>
+	<beans:bean name="/platform/component/dict/commondictcontroller/**" class="com.szboanda.platform.common.component.dict.controller.CommonDictController"/>
+	<beans:bean name="/platform/component/excel/commonexcelcontroller/**" class="com.szboanda.platform.common.component.excel.controller.CommonExcelController"/>
+	<beans:bean name="/platform/component/autocomplete/autocompletecontroller/**"
+		class="com.szboanda.platform.common.component.autocomplete.controller.AutoCompleteController" />
+	
+	 
+</beans:beans>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>工作流程相关的配置</comment>
+	
+	<!-- 工作流程引擎相关的配置内容 -->
+	<!-- 工作流引擎数据源配置     默认为jdbc/default -->
+	<entry key="platform.workflow.dataSource"/>
+	<!-- 工作流程定义实现 配置   默认为com.power.platform.workflow.jdbc.JDBCWorkflowDefinition -->
+	<entry key="platform.workflow.IWorkflowDefinitionImpl="><![CDATA[com.power.platform.workflow.jdbc.JDBCWorkflowDefinition]]></entry>
+	<!--  工作流实现配置   默认为com.power.platform.workflow.jdbc.JDBCWorkflow -->
+	<entry key="platform.workflow.IWorkflowImpl"><![CDATA[com.power.platform.workflow.jdbc.JDBCWorkflow]]></entry>
+	<!-- 工作流主键生成器配置 默认为com.power.platform.workflow.jdbc.DefaultWorkflowIDGenerator -->    
+	<entry key="platform.workflow.IWorkflowIDGenerator"><![CDATA[com.szboanda.platform.workflow.engine.DefaultWorkflowIDGenerator]]></entry>
+    <!-- 全局工作流监听程序 com.szboanda.platform.workflow.event.WorkflowActionChecker-->    
+	<entry key="platform.workflow.global.listeners"><![CDATA[]]></entry>
+	   
+	
+	<!-- 任务及时相关配置 -->    
+	<!-- 任务计时用到的数据库连接  -->
+	<entry key="platform.taskTime.jndi">jdbc/default</entry>           
+	<!-- 取得节假日的来源方式，目前提供两种。一种：db(存在在数据里),另一种:xml（存放在holiday-config.xml文件中。）  -->
+	<entry key="plaform.taskTime.holidayFormSource">db</entry> 
+	<!-- 任务描述类的配置 -->
+	<entry key="plaform.taskTime.taskDescriptor">com.szboanda.platform.v3.util.timer.DefaultTaskDescriptor</entry>  
+	<!--	任务计时用到的主定义表的查询	-->    
+	<entry key="platform.taskTime.zdybQuery">
+	<![CDATA[ 
+		SELECT BH,MC,QX,QXLX,SXL,ORGID,CJR,CJSJ,XGR,XGSJ FROM T_WORKFLOW_ZDYB  where BH=? and ORGID=?
+	]]>
+	</entry>
+	<!--	任务计时用到的阶段定义表的查询	--> 
+	<entry key="platform.taskTime.jdybQuery">
+	<![CDATA[
+		SELECT JDBH,JDMC,RWLX,ORGID,CJR,CJSJ,XGR,XGSJ FROM T_WORKFLOW_JDDYB WHERE RWLX=? and ORGID=?
+	]]>	
+	</entry>  
+	<!--	任务计时用到的步骤定义表的查询	--> 
+	<entry key="platform.taskTime.bzdybQuery">   
+	<![CDATA[ 
+		SELECT BZBH,BZMC,RWLX,JDBH,QX,QXLX,SFBX,ORGID,CJR,CJSJ,XGR,XGSJ FROM T_WORKFLOW_BZDYB where RWLX=? and ORGID=?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的计时实例表的查询	--> 
+	<entry key="platform.taskTime.jsslbQuery">    
+	<![CDATA[      
+		SELECT RWBH,RWLX,KSSJ,JSSJ,QX,ZT,CZZ,ORGID,CJR,CJSJ,XGR,XGSJ FROM T_WORKFLOW_JSSLB WHERE RWBH = ?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤表的查询语句	--> 
+	<entry key="platform.taskTime.bzbQuery">    
+	<![CDATA[      
+		select BZBH,RWBH,BZDYBH,KSSJ,QX,JSSJ,CLHS,ZT,CZZ,ORGID,CJR,CJSJ,XGSJ,XGR from u_admin.T_WORKFLOW_BZB where RWBH=?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤子表的查询语句	--> 
+	<entry key="platform.taskTime.bzzbQuery">    
+	<![CDATA[      
+		select BZZBH,BZBH,FSSJ,ZT,CZZ,ORGID,CJR,CJSJ,XGR,XGSJ from T_WORKFLOW_BZZB where BZBH=?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的计时实例表的插入语句	--> 
+	<entry key="platform.taskTime.jsslbInsert">    
+	<![CDATA[      
+		insert into T_WORKFLOW_JSSLB (RWBH,RWLX,KSSJ,QX,ZT,CZZ) values(?,?,?,?,?,?)
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤表的插入语句	--> 
+	<entry key="platform.taskTime.bzbInsert">    
+	<![CDATA[      
+		insert into T_WORKFLOW_BZB (BZBH,RWBH,BZDYBH,KSSJ,QX,JSSJ,CLHS,ZT,CZZ,ORGID,CJR,CJSJ,XGSJ,XGR) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?) 
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤子表的插入语句	--> 
+	<entry key="platform.taskTime.bzzbInsert">    
+	<![CDATA[      
+		insert into T_WORKFLOW_BZZB (BZZBH,BZBH,FSSJ,ZT,CZZ) values (?,?,?,?,?)
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤子表的插入语句	--> 
+	<entry key="platform.taskTime.jsslUpdate">    
+	<![CDATA[      
+		update T_WORKFLOW_JSSLB set ZT=?,CZZ=?,JSSJ=? where RWBH=?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤表的插入语句	--> 
+	<entry key="platform.taskTime.bzbUpdate">    
+	<![CDATA[      
+		update T_WORKFLOW_BZB set ZT=?,CZZ=?,JSSJ=? where BZBH=?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤表的修改状态的语句	--> 
+	<entry key="platform.taskTime.bzbAllStateUpdate">    
+	<![CDATA[      
+		update T_WORKFLOW_BZB set ZT=? where RWBH=?
+	]]>	
+	</entry> 
+	<!--	任务计时用到的步骤表的修改状态的语句	--> 
+	<entry key="platform.taskTime.bzbAllJssjUpdate">    
+	<![CDATA[      
+		update T_WORKFLOW_BZB set JSSJ=? where RWBH=? and JSSJ is null 
+	]]>		
+	</entry> 
+	<!--	节假日表查询	--> 
+	<entry key="platform.taskTime.jjrbQuery">    
+	<!-- 将以下语句替换，以做到对数据库的兼容 -->
+    <!-- select distinct to_char(rq,'yyyyMMDD') as RQ,sfxx as SFXX from T_PD_HOLIDAY -->
+    <![CDATA[      
+        select distinct rq as RQ,sfxx as SFXX from T_PD_HOLIDAY
+    ]]> 	
+	</entry>  
+</properties>

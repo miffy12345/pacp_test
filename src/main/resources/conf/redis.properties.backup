@@ -1,0 +1,12 @@
+# Redis settings
+redis.host=#{redis_host}
+redis.port=#{redis_port}
+#redis.pass=#{redis_pass}
+redis.timeout=#{redis_timeout}
+redis.maxIdle=#{redis_maxIdle}
+redis.minIdle=#{redis_minIdle}
+redis.maxTotal=#{redis_maxTotal}
+redis.maxWaitMillis=#{redis_maxWaitMillis}
+redis.testOnBorrow=#{redis_testOnBorrow}
+redis.testOnReturn=#{redis_testOnReturn}
+redis.testWhileIdle=#{redis_testWhileIdle}

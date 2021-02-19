@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!-- 日志文件配置 --> 
+	<entry key="platform.log_path"/>    
+	<entry key="platform.logger_table_name"/>
+	<!-- 日志使用的数据源的jndi --> 
+	<entry key="platform.logger_datasource"></entry>
+	<!-- 制定一个限制级别，低于这个级别的日志将不被记录 默认值为6 MESSAGE(8),  ERROR(6),INFO(4), DEBUG(2); -->
+	<entry key="platform.logger_write_level">0</entry> 
+	<entry key="platform.log_insert_sql">INSERT INTO T_XTGL_XTRZ(XH, JKJB, JQIP, RZXX, RZNR, RZDZ, CJR, CJSJ, CZR, CZSJ, ORGID,MK) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)</entry>
+	
+	<!-- 日志数据源jndi --> 
+	<entry key="platform.logger_jndi">jdbc/log</entry> 
+	<!-- 日志线程池大小 --> 
+	<entry key="platform.logger_thread_pool_size">5</entry> 
+	<!-- 日志队列刷新间隔，单位为毫秒 --> 
+	<entry key="platform.logger_queue_refresh_period">5000</entry> 
+	<!-- 日志调用方式;local:本地；remote:远程 --> 
+	<entry key="platform.logger_type">local</entry> 
+	<!-- 每次查询数据库记录大小 -->
+	<entry key="platform.logger_record_size">5</entry> 
+	<!-- 最后一次查询时间与当前时间的间隔，如果超过这个时间就清除加载的信息，单位为毫秒 -->
+	<entry key="platform.logger_clear_period">300000</entry> 
+	<!-- 设置是否需要记录相关日志,true:表示记录，false:表示不记录 -->
+	<!-- 业务操作日志 -->
+	<entry key="platform.logger_business">true</entry>
+	<!-- 数据访问日志 -->
+	<entry key="platform.logger_db">true</entry>
+	<!-- 登录日志 -->
+	<entry key="platform.logger_login">true</entry>
+	<!-- 菜单访问日志 -->
+	<entry key="platform.logger_menu">true</entry>
+	<!-- 服务调用日志 -->
+	<entry key="platform.logger_service">true</entry>
+	<!-- 系统跟踪日志 -->
+	<entry key="platform.logger_trace">true</entry>
+	<!-- 设置需要过滤的包,如果有多个包，可以通过(,)分割 -->
+	<entry key="platform.logger_filter_package">com.szboanda.test</entry>
+	<!-- 日志展示方式,通过配置{}之间的值来拼接数据；X:相对时间（几分钟前，几小时前）、M:模块、R:人员、B:部门、I:IP地址、L:操作类型、S:时间、N：内容、H:客户端类型 -->
+	<entry key="platform.logger_show_pattern">{N}</entry>
+	<!-- 业务日志展示时间的格式,yyyy-MM-dd HH:mm:ss -->
+	<entry key="platform.logger_show_time_pattern">yyyy-MM-dd HH:mm</entry>
+</properties>

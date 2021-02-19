@@ -1,0 +1,51 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.powersmart.ptyfb</groupId>
+	<artifactId>baseSystem</artifactId>
+	<packaging>war</packaging>
+	<version>1.0.1-SNAPSHOT</version>
+    <description>示例</description>
+    <url>http://www.szboanda.com/</url>
+    <properties>
+        <COMPILE.JDK>1.8</COMPILE.JDK>
+        <COMPILE.ENCODING>UTF-8</COMPILE.ENCODING>
+    </properties>
+ 
+	
+	<build>
+		<defaultGoal>compile</defaultGoal>
+		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
+		<plugins>
+        <!-- 指定jdk -->
+	    	<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <configuration>
+	                <source>1.8</source>
+	                <target>1.8</target>
+	                <encoding>UTF-8</encoding>
+	            </configuration>
+	        </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<!-- 控制是否生成war文件，默认是true，如果通过自动化创建Docker镜像，则设置为false，提升构建速度 -->
+					<createWarFile>true</createWarFile>
+				</configuration>
+				<version>2.2-powersmart-1.0</version>
+			</plugin>
+	    </plugins>
+	</build>
+    <dependencies>
+      
+        <!-- 应用定制平台 -->
+        <dependency>
+		  <groupId>com.szboanda.platform</groupId>
+		  <artifactId>powerdata-platform-pacp</artifactId>
+		  <version>2.0.0-RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>szboanda</comment>
+	<entry key="soa.office.source.file.folder">source</entry>
+	<entry key="soa.office.temp.file.folder">template</entry>
+	<entry key="soa.office.create.file.folder">/WEB-INF/UPLOAD_FLIE</entry>
+	<entry key="workflow.upload.fj.path">WEB-INF/WORKFLOW</entry>
+	<entry key="workflow.upload.yjgl.path">WEB-INF/YJGL</entry>
+	<entry key="soa.office.root.file.folder">soaoffice</entry>
+
+	<!-- soaOffice 导出Excel文件 -->
+	<entry key="soa.show.excel.url">/pages/platform/soaoffice/showExcel.jsp</entry>
+	<!-- soaOffice 保存文件 -->
+	<entry key="soa.save.file.url">/pages/platform/soaoffice/saveDoc.jsp</entry>
+	<!-- soaOffice 通过用流打开文件 -->
+	<entry key="soa.open.file.url">/pages/platform/soaoffice/openFile.jsp</entry>
+	<!-- <entry key="soa.office.server">2.2.2.104</entry> -->
+	
+	<!-- 模版与数据库对应 -->
+	<entry key="soa.office.doc.template.fwzy_bpb">T_SYS_PARAM_CONFIG</entry>
+	
+	<!-- SOAoffice Servlet -->
+	<entry key="soa.office.server.url">soaOffice/SoaServelt</entry>
+	<!-- SOAoffice版本信息 -->
+	<entry key="soa.office.version">2,0,0,1</entry>
+	<entry key="soa.office.classid">AD06827C-D92F-4648-B880-138AF11E8A13</entry>
+	
+	<!-- SoaOffice右键控制 默认false不显示，true显示-->
+	<entry key="soa.office.right.menu">false</entry>
+</properties>

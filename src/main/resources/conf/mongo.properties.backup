@@ -1,0 +1,27 @@
+# mongo settings
+userName=#{mongo_userName}
+pwd=#{mongo_pwd}
+#\u9a8c\u8bc1\u6570\u636e\u5e93\u540d\u79f0
+adminDb=#{mongo_adminDb}
+#\u6570\u636e\u5e93\u540d\u79f0
+dbname=#{mongo_dbname}
+#host \u6570\u91cf
+len=#{mongo_len}
+#host\u5730\u5740
+host1=#{mongo_host1}
+#\u7aef\u53e3\u5730\u5740
+port1=#{mongo_port1}
+#\u6BF\u5929\u4e3b\u673a\u6700\u5927\u8fde\u63a5\u6570
+connectionsPerHost=#{mongo_connectionsPerHost}
+#\u7ebf\u7a0b\u961f\u5217\u6570\u91cf
+threads=#{mongo_threads}
+#\u662f\u5426\u9009\u54df\u8eab\u4efd\u9a8c\u8bc11
+authentication=#{mongo_authentication}
+
+maxWaitTime=#{mongo_maxWaitTime}
+
+socketTimeout=#{mongo_socketTimeout}
+
+maxConnectionLifeTime=#{mongo_maxConnectionLifeTime}
+
+connectTimeout=#{mongo_connectTimeout}

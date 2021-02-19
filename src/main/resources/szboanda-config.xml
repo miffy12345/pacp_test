@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>主配置文件</comment> 
+	<!-- 系统ID -->
+	<entry key="system.id">jgjc</entry>
+	<!-- 系统组织ID --> 
+	<entry key="system.orgid">320281</entry> 
+	<!-- 配置密码加密的方式,可以有如下配置：CLEAR_TEXT 明文，MD5 , DES, MD5_DES_MD5  -->
+	<entry key="system.password.encrypt.type">MD5</entry> 
+	<!-- 系统使用的数据源的jndi -->
+	<entry key="platform.jdbc.jndi">jdbc/default</entry>   
+	<!-- 系统登录验证码类型（default字母随机数、number简单数字加减） -->
+	<entry key="system.login.validateCode.type">default</entry>
+	<!-- 需要加载的其他配置文件 -->
+	<entry key="platform.properties_files"><![CDATA[szboanda-workflow.xml,szboanda-soaoffice.xml,szboanda-pageoffice.xml,szboanda-config-rms.xml,szboanda-logger.xml]]></entry>
+	 
+	<!-- 系统启动时需要加载的资源 -->
+	<!-- 系统参数配置信息,加载applicationScope.Sysparam信息 com.szboanda.platform.v3.util.resources.SystemParamConfigLoader,, -->
+	<!-- 注册struts日期解析转化器 com.szboanda.platform.v3.util.listener.ConvertLoader, -->
+	<!-- 系统业务参数加载程序 加载applicationScope.SYS_PARAM信息  com.szboanda.platform.v3.util.resources.SystemParametersLoader-->
+	<!-- 系统代码值加载程序 com.szboanda.platform.v3.util.resources.SystemCodesLoader -->
+	<!-- 工作流程资源加载程序 目前主要是加载全局流程监听程序 com.szboanda.platform.workflow.event.WorkflowResourceLoader -->
+	<!-- 消息中心启动程序 启动ActiveMq com.szboanda.platform.activemq.MessageResourceLoader -->
+	<entry key="platform.resourceLoader">
+		com.szboanda.platform.v3.util.resources.SystemParamConfigLoader,
+		com.szboanda.platform.v3.util.listener.ConvertLoader,
+		com.szboanda.platform.v3.util.resources.SystemParametersLoader,   
+		com.szboanda.platform.v3.util.resources.SystemCodesLoader,
+		com.szboanda.platform.workflow.event.WorkflowResourceLoader,
+		com.szboanda.platform.v3.scheduler.SchedulerHandler, 
+		com.szboanda.platform.v3.util.onlineuser.SystemOnlineUserLoader
+	</entry>
+	
+	<!-- 加载系统代码相关的SQL -->
+	<entry key="platform.code_load_sql">
+		SELECT DMJBH AS SUBJECT,
+		       DM    AS CODEID,
+		       DMMC  AS VALUE,
+		       ORGID,
+		       PXH,
+		       SFYX  AS VALID,
+		       FDM   AS PARENTCODEID,
+		       BZ
+		  FROM T_PLATFORM_GGDMZ
+		 ORDER BY SUBJECT, PXH, CODEID;
+		SELECT FDM AS SUBJECT,
+		       XZQHDM AS CODEID,
+		       XZQH AS VALUE,
+		       ORGID,
+		       FDM AS PARENTCODEID,
+		       PXM AS PXH,
+		       '1' AS VALID
+		  FROM T_PLATFORM_XZQHDM
+		 ORDER BY PXM
+	</entry>
+	<entry key="platform.param_load_sql">SELECT CSM, CSZ, FJXX, BZ, ORGID FROM T_PD_XTCSB</entry>
+	
+	
+		
+	<entry key="platform.favorites.type">T_FAVORITES_TYPE</entry> 
+  	<entry key="platform.favorites.yhscj">T_FAVORITES_YHSCJ</entry>     
+  	<entry key="platform.favorites.content">T_FAVORITES_CONTENT</entry> 
+  	<!-- 顺序号定义 -->
+  	<entry key="platform.id_generator.format">T_ADMIN_XTGL_SXHDY</entry>
+  	<!-- 记录当前顺序号 -->
+	<entry key="platform.id_generator.current">T_ADMIN_XTGL_XTXH</entry>
+  	
+  	<!-- 权限相关的SQL -->
+	<entry key="permission.loader">com.szboanda.platform.v3.util.permissions.NewRmsPermissionsLoader</entry>
+	<entry key="system.user.otherinfo.loader">com.szboanda.platform.system.core.UserLoginRecordAdapter,com.szboanda.platform.system.core.UserSystemConfigHandler</entry>
+	<!-- 
+	<entry key="platform.permissions.user.sql">SELECT UM_LOGIN_ID ID, ORGID SYSTEMID, UM_NAME NAME FROM U_ADMIN.T_PD_USER_MASTER WHERE UM_LOGIN_ID = ?</entry>
+	<entry key="platform.permissions.functions.sql">select*fromu_admin.t_admin_yhgl_</entry>
+	<entry key="platform.permissions.roles.sql">SELECT D.XH ROLEID,D.JSMC ROLENAME FROM U_ADMIN.T_ADMIN_YHGL_JSYHZGXB C INNER JOIN U_ADMIN.T_ADMIN_YHGL_JS D ON C.JSXH=D.XH INNER JOIN U_ADMIN.T_ADMIN_YHGL_YHZ E ON E.XH=C.YHZXH WHERE E.XH=?</entry>
+	<entry key="platform.permissions.groups.sql">SELECT B.XH GROUPID,B.YHZMC GROUPNAME FROM U_ADMIN.T_ADMIN_YHGL_YHYHZGXB A INNER JOIN U_ADMIN.T_ADMIN_YHGL_YHZ B ON A.YHZXH=B.XH INNER JOIN U_ADMIN.T_PD_USER_MASTER C ON A.JSXH=C.UM_LOGIN_ID WHERE C.UM_LOGIN_ID=? </entry>
+	<entry key="platform.permissions.menu.sql">SELECT FF.CDXH || '' MENUID,FF.GNMC MENUNAME FROM U_ADMIN.T_ADMIN_YHGL_JSGNGXB EE INNER JOIN U_ADMIN.T_ADMIN_YHGL_GN FF ON EE.GNXH=FF.XH INNER JOIN U_ADMIN.T_ADMIN_YHGL_JS DD ON DD.XH=EE.JSXH WHERE FF.GNMC=?</entry>
+	<entry key="platform.permissions.menus.sql">SELECT FF.CDXH || '' MENUID,FF.GNMC MENUNAME FROM U_ADMIN.T_ADMIN_YHGL_JSGNGXB EE INNER JOIN U_ADMIN.T_ADMIN_YHGL_GN FF ON EE.GNXH=FF.XH INNER JOIN U_ADMIN.T_ADMIN_YHGL_JS DD ON DD.XH=EE.JSXH WHERE DD.XH=?</entry>	
+	<entry key="platform.permissions.function.sql">select*fromu_admin.t_admin_yhgl_</entry>
+	<entry key="platform.permissions.group.sql">SELECT B.XH GROUPID,B.YHZMC GROUPNAME FROM U_ADMIN.T_ADMIN_YHGL_YHYHZGXB A INNER JOIN U_ADMIN.T_ADMIN_YHGL_YHZ B ON A.YHZXH=B.XH INNER JOIN U_ADMIN.T_PD_USER_MASTER C ON A.JSXH=C.UM_LOGIN_ID WHERE B.XH =?</entry>
+	<entry key="platform.permissions.role.sql">SELECT D.XH ROLEID,D.JSMC ROLENAME FROM U_ADMIN.T_ADMIN_YHGL_JSYHZGXB C INNER JOIN U_ADMIN.T_ADMIN_YHGL_JS D ON C.JSXH=D.XH INNER JOIN U_ADMIN.T_ADMIN_YHGL_YHZ E ON E.XH=C.YHZXH WHERE D.XH=?</entry>
+	 -->
+	 
+	<!-- 查询用户基本信息 ,在2012年2月份rms系统调整后的版本中，这个不是必须的配置项--> 
+	<!--  
+	<entry key="platform.permissions.user.sql"><![CDATA[
+		SELECT YHID AS ID,YHMC AS NAME,BMBH AS DEPARTMENT,BGDH AS TELEPHONE,YHSJ AS MOBILE,YHZW AS JOB,SKIN,YHJB,YHCW,ORGID FROM V_ADMIN_RMS_YHXXST WHERE YHID = ? 
+	]]></entry>
+	-->
+	<!-- 查询菜单详拥有的功能信息 -->
+	<entry key="platform.permissions.load.sql"><![CDATA[
+		SELECT GW.XH POSTID,GW.GWMC POSTNAME,XT.XTBH SYSTEMID,GWGX.YHZXH GROUPID,YHZ.YHZMC GROUPNAME,YHZGX.JSXH ROLEID,JS.JSMC ROLENAME,
+		   CD.XH AS MENUID,CD.CDMC AS MENUNAME,CD.PXH AS SERIALNO,CD.SFYX AS VALID,CD.FCDXH AS PARENTID,CD.LJDZ AS URL,
+		       CD.SSXT AS SYSTEMID,1 AS "LEVEL",CD.LJXT,CD.BZ AS REMARK,CD.TPWZ,CD.CDXH 
+		FROM T_ADMIN_RMS_GW GW
+		INNER JOIN T_ADMIN_RMS_GWYYHZGXB GWGX ON GW.XH = GWGX.GWXH 
+		INNER JOIN T_ADMIN_RMS_YHZYJSGXB YHZGX ON GWGX.YHZXH = YHZGX.YHZXH
+		INNER JOIN T_ADMIN_RMS_YHZ YHZ ON YHZGX.YHZXH = YHZ.XH
+		INNER JOIN T_ADMIN_RMS_JSYCDGXB JSGX ON YHZGX.JSXH = JSGX.JSXH
+		INNER JOIN T_ADMIN_RMS_JS JS ON JSGX.JSXH = JS.XH
+		INNER JOIN T_ADMIN_RMS_CD CD ON JSGX.CDXH = CD.XH
+		INNER JOIN T_ADMIN_RMS_XT XT ON YHZ.SSXT = XT.XH
+		WHERE  EXISTS ( SELECT 1 FROM T_ADMIN_RMS_YHYGWGXB BB WHERE  YHXH = ? AND BB.GWXH = GW.XH )
+			   AND XT.XTBH = ?
+	]]></entry>  
+  	
+  	<!-- 认证相关 -->
+	<entry key="authentication.credential"/>
+	<entry key="authentication.handler"/>
+	<entry key="cookie.user">USERID</entry>
+	<entry key="cookie.pwd">PASSWORD</entry>
+	<entry key="cookie.user.save">TRUE</entry>
+	<entry key="cookie.expire.time">2000000</entry>
+	<entry key="authentication.sql">SELECT * FROM V_ADMIN_RMS_YH WHERE YHID = ? AND YHMM = ?</entry>
+	<entry key="cookie.pwd.save">TRUE</entry>
+	<!-- 连续登录认证错误参数(认证错误次数限制、认证错误限制次数、认证错误自动解锁时间[分]) -->
+	<entry key="authentication.errortimes.limit"/>
+	<entry key="authentication.errortimes"/>
+	<entry key="authentication.unfreeze.time"/>
+	
+	<!-- 是否使用验证码 true:需要验证码；false:不需要验证 系统默认为true -->
+	<entry key="authentication.needvalicode">false</entry>
+	
+	<!-- 在线用户统功能配置参数(启动在线用户统计功能、定时请求时间[秒]、离线间隔时间[分]、定时释放缓存时间间隔[分]) -->
+	<entry key="onlineuser.open">false</entry>
+	<entry key="timing.request.time">30</entry>
+	<entry key="timing.request.time">30</entry>
+	<entry key="offline.time.interval">1</entry>
+	<entry key="release.cache.time">1</entry>
+	
+	<!-- 系统相关配置参数 -->
+	<entry key="system.name">系统名称:环境业务协同系统</entry>
+	<entry key="system.login.page">系统登陆:/platform/pages/index/login.jsp</entry>
+	<entry key="system.index">系统主页:/platform/pages/index/frame/index.jsp</entry>
+	<entry key="system.menu.root">系统根菜单:ROOT</entry>
+	<entry key="system.supporter">技术人员:廖声乐 </entry>
+	<entry key="system.supporter.online">技术员在线联系方式:QQ</entry>
+	<entry key="system.supporter.email">技术支持人员邮箱:youxiang@szboanda.com</entry>
+	<entry key="system.supporter.phone">技术支持人员办公电话:2600000</entry>
+	<entry key="system.supporter.mobile">技术支持人员移动电话:2600000</entry>
+	
+	<!-- 个人主页 -->
+	<entry key="system.user.index.page">/pages/platform/workshop/index.jsp?newTaskWindow=true</entry>
+	
+	<!-- 将以下资源引入到系统参数并持久化 -->
+	<entry key="system.param.save.entity">
+		system.name,
+		system.login.page,
+		system.index,
+		system.menu.root,
+		system.supporter,
+		system.supporter.online,
+		system.supporter.email,
+		system.supporter.phone,
+		system.supporter.mobile
+	</entry>
+	
+	<!-- 任务调度的数据源 -->
+	<entry key="job.quartz.jdbc.jndi"/>
+	
+	<!-- 控制系统是否进行页面和aciton的权限验证(默认 true 进行权限验证) -->
+	<entry key="system.pages.permissions.flag">true</entry>
+	
+	<!-- 控制系统皮肤是否应用文件夹内样式 -->
+	<entry key="system.skin.isfolder">false</entry>
+	<!-- 使用支持.NET -->
+	<entry key="system.des.support.net">false</entry>
+	<!-- 登录是否缓存系统菜单,配置true后在进行菜单修改后需要在业务系统重新加载下使用loadSystemData.jsp页面 -->
+	<entry key="system.menus.load.userCache">false</entry>
+	
+	<!-- 系统运行模式,可设置成development，production，debug(默认development)  -->
+	<entry key="platform.mode">production</entry>
+	
+	<!-- 限制上传文件大小,以M为单位 -->
+	<entry key="file_upload_limit_size">1</entry>
+	
+	<!-- 控制是否显示在线用户 -->
+	<entry key="online_user_display">true</entry>
+	
+	<!-- 部门角色 -->
+	<entry key="LEADER_ORG_ALL">组织所有领导</entry>
+	<entry key="LEADER_ORG_S">组织一般领导</entry>
+	<entry key="LEADER_ORG_H">组织主要领导</entry>
+	<entry key="LEADER_ORG_B">分管领导</entry>
+	
+	<entry key="LEADER_DEPT_ALL">所有部门领导</entry>
+	<entry key="LEADER_DEPT_S">所有部门一般领导</entry>
+	<entry key="LEADER_DEPT_H">所有部门主要领导</entry>
+	<entry key="DEPT_SPEAKER">所有部门接口人</entry>
+	
+	<entry key="LEADER_THIS_DEPT_ALL">所有领导</entry>
+	<entry key="LEADER_THIS_DEPT_S">一般领导</entry>
+	<entry key="LEADER_THIS_DEPT_H">主要领导</entry>
+	<entry key="THIS_DEPT_SPEAKER">接口人</entry>
+	
+	<entry key="WORKER_DEPT_ALL">所有部门工作人员</entry>
+	<entry key="WORKER_THIS_DEPT">工作人员</entry>
+	<entry key="WORKER_SUB_DEPT">子部门工作人员</entry>
+	<entry key="WORKER_BRO_DEPT">兄弟部门工作人员</entry>
+	<entry key="WORKER_SUP_DEPT">上级部门工作人员</entry>
+	<entry key="system.sqlserver2005.versionNumber">10.50.1600</entry>
+	
+	<!-- 用户树显示,default所有部门,same_data_limit同级数据权限的部门 -->
+	<entry key="user_tree_display">sameDataLimit</entry>
+	
+	<!-- 事件发布枚举类，多个用英文逗号分隔。枚举类用于定义事件。  -->
+	<entry key="platform.event.enum">
+		com.szboanda.platform.v3.util.event.publish.Events
+	</entry>
+	
+	<!-- 系统安全测评 -->
+	<entry key="system.security.test">true</entry>
+</properties>

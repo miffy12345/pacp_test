@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
+	
+	<context:property-placeholder location="classpath:/conf/redis.properties" ignore-unresolvable="true" />
+  
+    <beans:bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+         <!-- 控制一个pool可分配多少个jedis实例 --> 
+         <beans:property name="maxTotal" value="${redis.maxTotal}"/>
+         <!-- 控制一个pool最多有多少个状态为idle(空闲)的jedis实例 -->  
+         <beans:property name="maxIdle" value="${redis.maxIdle}"/>
+         <beans:property name="minIdle" value="${redis.minIdle}"/>
+         <!-- 表示当borrow一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException -->  
+         <beans:property name="maxWaitMillis" value="${redis.maxWaitMillis}"/>
+         <!-- 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的 -->  
+         <beans:property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+         <beans:property name="testOnReturn" value="${redis.testOnReturn}"/>
+         <beans:property name="testWhileIdle" value="${redis.testWhileIdle}"/>
+    </beans:bean>
+
+        
+    <!-- redis的连接池pool，不是必选项：timeout/password  -->
+    <beans:bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+      <beans:constructor-arg index="0" ref="jedisPoolConfig"/>
+      <beans:constructor-arg index="1" value="${redis.host}"/>
+      <beans:constructor-arg index="2" value="${redis.port}" type="int"/>
+      <beans:constructor-arg index="3" value="${redis.timeout}" type="int"/>
+    </beans:bean>
+	
+	<beans:bean id="redisDao" class="com.szboanda.platform.cache.database.impl.redis.RedisDAOImpl">
+		<beans:property name="jedisPool" ref="jedisPool"></beans:property>
+	</beans:bean>
+</beans:beans>

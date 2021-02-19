@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>szboanda</comment>
+	<!--  pageoffice的文件目录 原始文件 -->
+	<entry key="po.source.file.folder">source</entry>
+	<!--  pageoffice的文件目录 模版文件 -->
+	<entry key="po.temp.file.folder">template</entry>
+	<!-- 使用office类型（MS、WPS） -->
+	<entry key="office.type">MS</entry>
+	
+	<!--  pageoffice的文件目录 生成目录 -->
+	<entry key="po.create.file.folder">/WEB-INF/UPLOAD_FLIE</entry>
+	<!--  pageoffice的文件目录 生成后的文件目录 -->
+	<entry key="po.root.file.folder">pageoffice</entry>
+	
+	<!-- pageoffice 保存文件页面 -->
+	<entry key="po.file.save.url">/pages/platform/pageoffice/saveDoc.jsp</entry>
+	<!-- pageoffice 导出Excel文件,如果使用soaoffice的导出页面，需要把po.show.excel.url的值设置为空 -->
+	<entry key="po.show.excel.url">/pages/platform/pageoffice/showExcel.jsp</entry>
+	
+	<!-- 默认设置pageoffice的控件id-->
+	<entry key="page.office.tag.id">pageOfficeCtrl</entry>
+	<!-- pageoffice的服务页面的URL-->
+	<entry key="page.office.server.url">poserver.do</entry>
+</properties>
